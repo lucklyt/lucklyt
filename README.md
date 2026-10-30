@@ -29,14 +29,40 @@ Hi, I'm **lucklyt**. My technical focus is Go backend engineering, authenticatio
   <img src="https://img.shields.io/badge/Kubernetes-0D1117?style=for-the-badge&amp;logo=kubernetes&amp;logoColor=326CE5" alt="Kubernetes" />
 </p>
 
-## `03 / telemetry`
+## `03 / inside the terminal`
 
-<p align="center">
-  <img height="170" src="https://github-readme-stats.vercel.app/api?username=lucklyt&amp;show_icons=true&amp;theme=github_dark&amp;hide_border=true&amp;title_color=39D353&amp;icon_color=39D353" alt="lucklyt's GitHub statistics" />
-  <img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=lucklyt&amp;layout=compact&amp;theme=github_dark&amp;hide_border=true&amp;title_color=39D353" alt="Most used languages in lucklyt's public repositories" />
-</p>
+```console
+$ cat /etc/lucklyt/mindset.conf
+language       = Go
+identity       = OAuth2 / OIDC / WebAuthn
+trust_boundary = explicit
+failure_mode   = expected
+retry_policy   = bounded + backoff + jitter
+```
 
-<!-- Public statistics and typing cards are served by third-party services and may be cached or temporarily unavailable. -->
+> Tokens expire. Networks partition. Design for both.
+
+<details>
+<summary><b>▶ Run a backend thought experiment</b></summary>
+
+### One request. Three questions.
+
+```text
+client ──▶ authenticate ──▶ Go service ──▶ event stream
+                │               │               │
+          Who are you?    May you do this?   Seen this before?
+```
+
+| What if… | Start here |
+| :--- | :--- |
+| A token is valid, but intended for another service? | Validate issuer and audience; check authorization separately. |
+| A client retries after a timeout? | Use idempotency keys; a timeout does not prove the operation failed. |
+| A message arrives twice? | Make consumers idempotent; acknowledge after durable processing. |
+| A dependency becomes slow? | Propagate deadlines, bound concurrency, and avoid retry storms. |
+
+The happy path is the opening scene. The failure path is where the story gets interesting.
+
+</details>
 
 ## `04 / contribution stream`
 
